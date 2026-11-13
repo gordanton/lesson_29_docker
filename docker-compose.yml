@@ -1,0 +1,28 @@
+# Два контейнера в одной сети Compose.
+# Браузер открывает только frontend. Тот сам ходит к backend по имени сервиса.
+name: lesson29
+
+services:
+  backend:
+    build: .
+    image: lesson29-app
+    container_name: lesson29-backend
+    # Порт наружу не публикуем: с компьютера на 5000 этот сервис не открыть.
+    # Внутри сети Compose он доступен как http://backend:5000
+    expose:
+      - "5000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:5000/health')"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 8s
+
+  frontend:
+    build: ./frontend
+    container_name: lesson29-frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      backend:
+        condition: service_healthy

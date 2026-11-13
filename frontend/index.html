@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Flask в контейнере</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">lesson 29 · docker compose</p>
+      <h1>Что отвечает Flask</h1>
+      <p class="lead">
+        Страница открыта с сервиса <code>frontend</code>.
+        Запросы к API идут внутри сети Compose на <code>backend:5000</code>, не на ваш компьютер.
+      </p>
+    </header>
+
+    <section class="card" aria-labelledby="status-title">
+      <div class="card-head">
+        <h2 id="status-title">Контейнер backend</h2>
+        <button type="button" id="refresh">Обновить</button>
+      </div>
+      <p id="status-error" class="error" hidden></p>
+      <dl class="facts">
+        <div><dt>Сообщение</dt><dd id="message">загрузка…</dd></div>
+        <div><dt>Здоровье</dt><dd id="health">загрузка…</dd></div>
+        <div><dt>Hostname</dt><dd id="hostname">загрузка…</dd></div>
+        <div><dt>Python</dt><dd id="python">загрузка…</dd></div>
+        <div><dt>Платформа</dt><dd id="platform">загрузка…</dd></div>
+        <div><dt>Архитектура</dt><dd id="architecture">загрузка…</dd></div>
+        <div><dt>Процессор</dt><dd id="processor">загрузка…</dd></div>
+        <div><dt>Папка</dt><dd id="workdir">загрузка…</dd></div>
+        <div><dt>Пользователь</dt><dd id="user">загрузка…</dd></div>
+        <div><dt>Время ответа</dt><dd id="timestamp">загрузка…</dd></div>
+      </dl>
+    </section>
+
+    <section class="card" aria-labelledby="calc-title">
+      <h2 id="calc-title">Калькулятор</h2>
+      <p class="hint">Те же маршруты, что у Flask: целые числа в адресе.</p>
+      <form id="calc-form">
+        <label>
+          Число a
+          <input id="a" name="a" type="number" step="1" value="6" required>
+        </label>
+        <label>
+          Число b
+          <input id="b" name="b" type="number" step="1" value="7" required>
+        </label>
+        <div class="actions">
+          <button type="submit" data-op="multiply">Умножить</button>
+          <button type="submit" data-op="divide">Разделить</button>
+        </div>
+      </form>
+      <p id="route" class="route"></p>
+      <p id="result" class="result">Результат появится здесь</p>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
